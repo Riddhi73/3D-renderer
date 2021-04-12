@@ -11,7 +11,7 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 	private int mouseX = -1;
 	private int mouseY = -1;
 	private int mouseB = -1;
-//	private int scroll = 0;
+	private int scroll = 0;
 	
 	public int getX() {
 		return this.mouseX;
@@ -19,6 +19,19 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 	public int getY() {
 		return this.mouseY;
 	}
+	
+	public boolean isScrollUp() {
+		return this.scroll == -1;
+	}
+	public boolean isScrollDown() {
+		return this.scroll == 1;
+	}
+	
+	public void resetScroll() {
+		this.scroll = 0;
+	}
+	
+	
 	public ClickType getB() {
 		switch(this.mouseB) {
 		case 1: 
@@ -39,7 +52,8 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
 		// TODO Auto-generated method stub
-		
+		scroll = e.getWheelRotation();
+		//System.out.println(scroll);
 	}
 
 	@Override

@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import renderer.input.ClickType;
 import renderer.input.Mouse;
 import renderer.point.MyPoint;
+import renderer.point.PointConverter;
 import renderer.shapes.MyPolygon;
 import renderer.shapes.Tetrahedron;
 
@@ -145,6 +146,15 @@ public class Display extends Canvas implements Runnable {
 			this.tetra.rotate(true, -xDif/mouseSensitivity, 0 , 0);
 			
 		}
+		
+		if(this.mouse.isScrollUp()) {
+			PointConverter.zoomIn();
+		}
+		else if(this.mouse.isScrollDown()) {
+			PointConverter.zoomOut();
+		}
+		
+		this.mouse.resetScroll();
 		initialX = x;
 		initialY = y;
 	}
