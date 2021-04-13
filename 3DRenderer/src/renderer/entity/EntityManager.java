@@ -26,7 +26,7 @@ public class EntityManager {
 	
 	public void init() {
 		
-		this.entities.add(BasicEntityBuilder.createCube(100, 0, 0, 0));
+		this.entities.add(BasicEntityBuilder.createDiamond(new Color(105, 243, 63), 100, 0, 0, 0));
 		
 		
 	}
