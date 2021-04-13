@@ -10,7 +10,7 @@ public class Tetrahedron {
 	
 	public Tetrahedron(Color color, MyPolygon... polygons) {
 		this.color = color;
-		this.polygons = polygons;
+	    this.polygons = polygons;
 		this.setPolygonColor();
 	}
 	
