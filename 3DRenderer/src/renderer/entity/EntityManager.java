@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import renderer.entity.builder.BasicEntityBuilder;
+import renderer.entity.builder.ComplexEntityBuilder;
 import renderer.input.ClickType;
 import renderer.input.Mouse;
 import renderer.point.MyPoint;
@@ -26,8 +27,9 @@ public class EntityManager {
 	
 	public void init() {
 		
-		this.entities.add(BasicEntityBuilder.createDiamond(new Color(105, 243, 63), 100, 0, 0, 0));
-		
+		//this.entities.add(BasicEntityBuilder.createDiamond(new Color(105, 243, 63), 100, 0, 0, 0));
+		//this.entities.add(BasicEntityBuilder.createCube(100, 0, 0, 0);
+	    this.entities.add(ComplexEntityBuilder.createRubiksCube(100, 0, 0, 0));
 		
 	}
 	

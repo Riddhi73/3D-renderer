@@ -12,48 +12,49 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 	private int mouseY = -1;
 	private int mouseB = -1;
 	private int scroll = 0;
-	
+
 	public int getX() {
 		return this.mouseX;
 	}
+
 	public int getY() {
 		return this.mouseY;
 	}
-	
+
 	public boolean isScrollUp() {
 		return this.scroll == -1;
 	}
+
 	public boolean isScrollDown() {
 		return this.scroll == 1;
 	}
-	
+
 	public void resetScroll() {
 		this.scroll = 0;
 	}
-	
-	
+
 	public ClickType getB() {
-		switch(this.mouseB) {
-		case 1: 
+		switch (this.mouseB) {
+		case 1:
 			return ClickType.LeftClick;
-		case 2: 
+		case 2:
 			return ClickType.ScrollClick;
-		case 3: 
+		case 3:
 			return ClickType.RightClick;
-		case 4: 
+		case 4:
 			return ClickType.BackPage;
-		case 5: 
+		case 5:
 			return ClickType.ForwardPage;
 		default:
 			return ClickType.UnKnown;
 		}
 	}
-	
+
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
 		// TODO Auto-generated method stub
 		scroll = e.getWheelRotation();
-		//System.out.println(scroll);
+		// System.out.println(scroll);
 	}
 
 	@Override
@@ -62,7 +63,7 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 //		System.out.println("Mouse Dragged");
 		this.mouseX = event.getX();
 		this.mouseY = event.getY();
-		
+
 	}
 
 	@Override
@@ -71,13 +72,13 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 //		System.out.println("Mouse Moved");
 		this.mouseX = event.getX();
 		this.mouseY = event.getY();
-		
+
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		//System.out.println("HELLO");
+		// System.out.println("HELLO");
 	}
 
 	@Override
@@ -85,7 +86,7 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 		// TODO Auto-generated method stub
 		this.mouseB = e.getButton();
 	}
-	
+
 	public int resetButton() {
 		this.mouseB = -1;
 		return this.mouseB;
@@ -100,13 +101,13 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
