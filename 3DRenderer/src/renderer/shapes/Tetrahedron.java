@@ -3,6 +3,8 @@ package renderer.shapes;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import renderer.point.MyVector;
+
 public class Tetrahedron {
 
 	private MyPolygon[] polygons;
@@ -34,12 +36,18 @@ public class Tetrahedron {
 		}
 	}
 
-	public void rotate(boolean CW, double xDegrees, double yDegrees, double zDegrees) {
+	public void rotate(boolean CW, double xDegrees, double yDegrees, double zDegrees, MyVector lightVector) {
 		for (MyPolygon p : this.polygons) {
-			p.rotate(CW, xDegrees, yDegrees, zDegrees);
+			p.rotate(CW, xDegrees, yDegrees, zDegrees, lightVector);
 		}
 		this.sortPolygons();
 	}
+	
+	public void setLighting(MyVector lightVector) {
+	    for (MyPolygon p : this.polygons) {
+            p.setLighting(lightVector);
+        }
+    }
 
 	private void sortPolygons() {
 		MyPolygon.sortPoligons(this.polygons);

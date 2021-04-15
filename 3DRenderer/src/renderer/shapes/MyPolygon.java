@@ -10,15 +10,17 @@ import java.util.Comparator;
 import java.util.List;
 
 import renderer.point.MyPoint;
+import renderer.point.MyVector;
 import renderer.point.PointConverter;
 
 public class MyPolygon {
 	
-	private MyPoint[] points;
-	private Color color;
+	private static final double AMBIENT_LIGHTING = 0.05;
+    private MyPoint[] points;
+	private Color baseColor,lightingColor;
 	
 	public MyPolygon(Color color,MyPoint... points) {
-		this.color = color;
+		this.baseColor = this.lightingColor = color;
 		this.points = new MyPoint[points.length];
 		for(int i=0;i<points.length;i++) {
 			MyPoint p = points[i];
@@ -28,7 +30,7 @@ public class MyPolygon {
 	
 
 	public MyPolygon(MyPoint... points) {
-		this.color = Color.WHITE;
+		this.baseColor = this.lightingColor =  Color.WHITE;
 		this.points = new MyPoint[points.length];
 		for(int i=0;i<points.length;i++) {
 			MyPoint p = points[i];
@@ -43,18 +45,22 @@ public class MyPolygon {
 			Point p = PointConverter.convertPoint(this.points[i]);
 			poly.addPoint(p.x, p.y);
 		}
-		g.setColor(this.color);
+		g.setColor(this.lightingColor);
 		g.fillPolygon(poly);
 	}
 	
-	public void rotate(boolean CW, double xDegrees, double yDegrees, double zDegrees) {
+	public void rotate(boolean CW, double xDegrees, double yDegrees, double zDegrees, MyVector lightvector) {
 		for(MyPoint p : points) {
 			PointConverter.rotationAxisX(p, CW, xDegrees);
 			PointConverter.rotationAxisY(p, CW, yDegrees);
      		PointConverter.rotationAxisZ(p, CW, zDegrees);
 
 		}
+		
+		this.setLighting(lightvector);
 	}
+	
+	
 	public double getAverageX() {
 		double sum = 0;
 		for(MyPoint p: this.points) {
@@ -63,7 +69,7 @@ public class MyPolygon {
 		return sum/this.points.length;
 	}
 	public void setColor(Color color) {
-		this.color = color;
+		this.baseColor = color;
 	}
 	
 	public static MyPolygon[] sortPoligons(MyPolygon[] polygons) {
@@ -92,5 +98,32 @@ public class MyPolygon {
 		}
 		return polygons;
 	}
+	
+	public void setLighting(MyVector lightVector) {
+	    if(this.points.length<3) {
+	        return;
+	    }
+	    
+	    MyVector v1 = new MyVector(this.points[0],this.points[1]);
+	    MyVector v2 = new MyVector(this.points[1],this.points[2]);
+	    MyVector normalVector = MyVector.normalize(MyVector.cross(v2, v1));
+	    double dot = MyVector.dot(normalVector, lightVector);
+	    double sign = dot<0 ? -1 : 1;
+	    dot = sign * dot * dot;
+	    dot = (dot + 1)/2 * 0.8;
+	    
+	    double lightingRatio = Math.min(1, Math.max(0, AMBIENT_LIGHTING + dot));
+	    this.updateLightingColor(lightingRatio);
+	}
+	
+	private void updateLightingColor(double lightRatio) {
+	    
+	    int red = (int) (this.baseColor.getRed() * lightRatio);
+	    int blue = (int) (this.baseColor.getBlue() * lightRatio);
+	    int green = (int) (this.baseColor.getGreen() * lightRatio);
+	    
+	    this.lightingColor = new Color(red, blue, green);
+	}
+	
 
 }

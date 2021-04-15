@@ -10,6 +10,7 @@ import renderer.entity.builder.ComplexEntityBuilder;
 import renderer.input.ClickType;
 import renderer.input.Mouse;
 import renderer.point.MyPoint;
+import renderer.point.MyVector;
 import renderer.point.PointConverter;
 import renderer.shapes.MyPolygon;
 import renderer.shapes.Tetrahedron;
@@ -20,6 +21,7 @@ public class EntityManager {
 	private List<IEntity> entities;
 	private int initialX,initialY;
 	private double mouseSensitivity = 2.5;
+	private MyVector lightVector = MyVector.normalize(new MyVector(1,1,1));
 	public EntityManager() {
 		
 		this.entities = new ArrayList<IEntity>();
@@ -30,10 +32,18 @@ public class EntityManager {
 		//this.entities.add(BasicEntityBuilder.createDiamond(new Color(105, 243, 63), 100, 0, 0, 0));
 		//this.entities.add(BasicEntityBuilder.createCube(100, 0, 0, 0);
 	    this.entities.add(ComplexEntityBuilder.createRubiksCube(100, 0, 0, 0));
+	    this.setLighting();
 		
 	}
 	
-	public void update(Mouse mouse) {
+	private void setLighting() {
+        // TODO Auto-generated method stub
+        for(IEntity entity: this.entities) {
+            entity.setLighting(this.lightVector);
+        }
+    }
+
+    public void update(Mouse mouse) {
 		int x = mouse.getX();
 		int y = mouse.getY();
 		if(mouse.getB() == ClickType.LeftClick) {
@@ -69,7 +79,7 @@ public class EntityManager {
 	
 	private void rotate(boolean direction, double xAngle, double yAngle, double zAngle) {
 		for(IEntity entity: this.entities) {
-			entity.rotate(direction, xAngle, yAngle, zAngle);	
+			entity.rotate(direction, xAngle, yAngle, zAngle, this.lightVector);	
 		}
 		
 	}

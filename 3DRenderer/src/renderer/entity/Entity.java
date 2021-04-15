@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import renderer.point.MyVector;
 import renderer.shapes.MyPolygon;
 import renderer.shapes.Tetrahedron;
 
@@ -24,6 +25,14 @@ public class Entity implements IEntity {
 		this.polygons = tempList.toArray(this.polygons);
 		this.sortPolygons();
 	}
+	
+	@Override
+	public void setLighting(MyVector lightVector) {
+	    for(Tetrahedron tetra : this.tetrahedrons) {
+            tetra.setLighting(lightVector);
+        }
+	}
+	
 	private void sortPolygons() {
 	    MyPolygon.sortPoligons(this.polygons);
 	}
@@ -37,10 +46,10 @@ public class Entity implements IEntity {
 	}
 
 	@Override
-	public void rotate(boolean CW, double xDegrees, double yDegrees, double zDegrees) {
+	public void rotate(boolean CW, double xDegrees, double yDegrees, double zDegrees,  MyVector lightVector) {
 		// TODO Auto-generated method stub
 		for(Tetrahedron tetra : this.tetrahedrons) {
-			tetra.rotate(CW, xDegrees, yDegrees, zDegrees);
+			tetra.rotate(CW, xDegrees, yDegrees, zDegrees, lightVector);
 		}
 		this.sortPolygons();
 		
