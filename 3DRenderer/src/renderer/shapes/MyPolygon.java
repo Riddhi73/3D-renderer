@@ -49,6 +49,18 @@ public class MyPolygon {
 		g.fillPolygon(poly);
 	}
 	
+	public void translate(double x, double y, double z) {
+	    for(MyPoint p : points) {
+           p.xoffset+=x;
+           p.yoffset+=y;
+           p.zoffset+=z;
+
+        }
+	}
+	
+	
+	
+	
 	public void rotate(boolean CW, double xDegrees, double yDegrees, double zDegrees, MyVector lightvector) {
 		for(MyPoint p : points) {
 			PointConverter.rotationAxisX(p, CW, xDegrees);

@@ -8,12 +8,12 @@ import renderer.entity.Entity;
 import renderer.entity.IEntity;
 import renderer.point.MyPoint;
 import renderer.shapes.MyPolygon;
-import renderer.shapes.Tetrahedron;
+import renderer.shapes.Polyhedron;
 
 public class ComplexEntityBuilder {
 
     public static IEntity createRubiksCube(double size, double centerX, double centerY, double centerZ) {
-        List<Tetrahedron> tetras = new ArrayList<Tetrahedron>();
+        List<Polyhedron> tetras = new ArrayList<Polyhedron>();
         double cubeSpacing = 10;
         for (int i = -1; i < 2; i++) {
             
@@ -46,7 +46,7 @@ public class ComplexEntityBuilder {
                     MyPolygon polyOrange = new MyPolygon(Color.ORANGE, p1, p3, p4, p2);
                     MyPolygon polyYellow = new MyPolygon(Color.YELLOW, p1, p5, p7, p3);
                     
-                    Tetrahedron tetra = new Tetrahedron(polyRed, polyWhite, polyBlue, polyGreen, polyOrange, polyYellow);
+                    Polyhedron tetra = new Polyhedron(polyRed, polyWhite, polyBlue, polyGreen, polyOrange, polyYellow);
                     tetras.add(tetra);
                 }
             }

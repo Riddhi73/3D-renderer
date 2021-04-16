@@ -11,6 +11,8 @@ public interface IEntity {
 	void rotate(boolean CW, double xDegrees, double yDegrees, double zDegrees, MyVector lightVector);
 	
 	void setLighting(MyVector lightVector);
+
+    void translate(double x, double y, double z);
 	
 	
 }

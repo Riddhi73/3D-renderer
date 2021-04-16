@@ -7,19 +7,19 @@ import java.util.List;
 
 import renderer.point.MyVector;
 import renderer.shapes.MyPolygon;
-import renderer.shapes.Tetrahedron;
+import renderer.shapes.Polyhedron;
 
 public class Entity implements IEntity {
 
-	private List<Tetrahedron> tetrahedrons;
+	private List<Polyhedron> polyhedrons;
 	
 	private MyPolygon[] polygons;
 	
-	public Entity(List<Tetrahedron> tetrahedrons) {
-		this.tetrahedrons = tetrahedrons;
+	public Entity(List<Polyhedron> polyhedrons) {
+		this.polyhedrons = polyhedrons;
 		List<MyPolygon> tempList = new ArrayList<MyPolygon>();
-		for(Tetrahedron tetra : this.tetrahedrons) {
-		    tempList.addAll(Arrays.asList(tetra.getPolygons()));
+		for(Polyhedron poly : this.polyhedrons) {
+		    tempList.addAll(Arrays.asList(poly.getPolygons()));
 		}
 		this.polygons = new MyPolygon[tempList.size()];
 		this.polygons = tempList.toArray(this.polygons);
@@ -28,8 +28,8 @@ public class Entity implements IEntity {
 	
 	@Override
 	public void setLighting(MyVector lightVector) {
-	    for(Tetrahedron tetra : this.tetrahedrons) {
-            tetra.setLighting(lightVector);
+	    for(Polyhedron poly : this.polyhedrons) {
+            poly.setLighting(lightVector);
         }
 	}
 	
@@ -48,12 +48,20 @@ public class Entity implements IEntity {
 	@Override
 	public void rotate(boolean CW, double xDegrees, double yDegrees, double zDegrees,  MyVector lightVector) {
 		// TODO Auto-generated method stub
-		for(Tetrahedron tetra : this.tetrahedrons) {
-			tetra.rotate(CW, xDegrees, yDegrees, zDegrees, lightVector);
+		for(Polyhedron poly : this.polyhedrons) {
+			poly.rotate(CW, xDegrees, yDegrees, zDegrees, lightVector);
 		}
 		this.sortPolygons();
 		
 	}
+
+    @Override
+    public void translate(double x, double y, double z) {
+        // TODO Auto-generated method stub
+        for(Polyhedron poly : this.polyhedrons) {
+            poly.translate(x, y, z);
+        }
+    }
 
 	
 	

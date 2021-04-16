@@ -17,9 +17,9 @@ public class PointConverter {
 		scale /= ZoomFactor;
 	}
     public static Point convertPoint(MyPoint point3D) {
-    	double x3d = point3D.y * scale;
-    	double y3d = point3D.z * scale;
-    	double depth = point3D.x * scale;
+    	double x3d = point3D.getAdjustedY() * scale;
+    	double y3d = point3D.getAdjustedZ() * scale;
+    	double depth = point3D.getAdjustedX() * scale;
     	double[] newVals = scale(x3d,y3d,depth);
 	    int x2d = (int)(Display.WIDTH/2 + newVals[0]);
 	    int y2d = (int)(Display.HEIGHT/2 - newVals[1]);

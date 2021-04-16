@@ -8,7 +8,7 @@ import renderer.entity.Entity;
 import renderer.entity.IEntity;
 import renderer.point.MyPoint;
 import renderer.shapes.MyPolygon;
-import renderer.shapes.Tetrahedron;
+import renderer.shapes.Polyhedron;
 
 public class BasicEntityBuilder {
 
@@ -24,7 +24,7 @@ public class BasicEntityBuilder {
 		MyPoint p7 = new MyPoint(centerX + -s/2,centerY + s/2,centerZ + s/2);
 		MyPoint p8 = new MyPoint(centerX + -s/2,centerY + -s/2,centerZ + s/2);
 		
-		Tetrahedron tetra = new Tetrahedron(
+		Polyhedron tetra = new Polyhedron(
 				
 				new MyPolygon(Color.BLUE, p5,p6,p7,p8),	
 				new MyPolygon(Color.WHITE, p1,p2,p6,p5),
@@ -33,7 +33,7 @@ public class BasicEntityBuilder {
 				new MyPolygon(Color.CYAN, p4,p3,p7,p8),
 				new MyPolygon(Color.RED, p1,p2,p3,p4));
 		
-		List<Tetrahedron> tetras = new ArrayList<Tetrahedron>();
+		List<Polyhedron> tetras = new ArrayList<Polyhedron>();
 		
 		tetras.add(tetra);
 		
@@ -44,7 +44,7 @@ public class BasicEntityBuilder {
         
 		
 		
-		List<Tetrahedron> tetras = new ArrayList<Tetrahedron>();
+		List<Polyhedron> tetras = new ArrayList<Polyhedron>();
 		
 		int edges = 10;
 		
@@ -74,7 +74,7 @@ public class BasicEntityBuilder {
 		
 		polygons[edges * 2] = new MyPolygon(innerPoints);
 		
-		Tetrahedron tetra = new Tetrahedron(color,true, polygons);
+		Polyhedron tetra = new Polyhedron(color,true, polygons);
 		
 		tetras.add(tetra);
 		return new Entity(tetras);

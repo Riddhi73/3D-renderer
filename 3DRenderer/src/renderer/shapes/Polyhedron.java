@@ -5,12 +5,12 @@ import java.awt.Graphics;
 
 import renderer.point.MyVector;
 
-public class Tetrahedron {
+public class Polyhedron {
 
 	private MyPolygon[] polygons;
 	private Color color;
 
-	public Tetrahedron(Color color, boolean decayColor, MyPolygon... polygons) {
+	public Polyhedron(Color color, boolean decayColor, MyPolygon... polygons) {
 		this.color = color;
 		this.polygons = polygons;
 		if (decayColor) {
@@ -21,7 +21,7 @@ public class Tetrahedron {
 		this.sortPolygons();
 	}
 
-	public Tetrahedron(MyPolygon... polygons) {
+	public Polyhedron(MyPolygon... polygons) {
 		this.color = Color.WHITE;
 		this.polygons = polygons;
 		this.sortPolygons();
@@ -71,5 +71,12 @@ public class Tetrahedron {
 
 		}
 	}
+
+    public void translate(double x, double y, double z) {
+        // TODO Auto-generated method stub
+        for (MyPolygon p : this.polygons) {
+            p.translate(x,y,z);
+        }
+    }
 
 }

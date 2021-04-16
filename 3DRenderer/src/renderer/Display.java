@@ -11,10 +11,11 @@ import javax.swing.JFrame;
 import renderer.entity.EntityManager;
 import renderer.input.ClickType;
 import renderer.input.Mouse;
+import renderer.input.UserInput;
 import renderer.point.MyPoint;
 import renderer.point.PointConverter;
 import renderer.shapes.MyPolygon;
-import renderer.shapes.Tetrahedron;
+import renderer.shapes.Polyhedron;
 
 public class Display extends Canvas implements Runnable {
 
@@ -32,7 +33,7 @@ public class Display extends Canvas implements Runnable {
 
 	private EntityManager entityManager;
 
-	private Mouse mouse;
+	private UserInput userinput;
 
 	public Display() {
 		this.frame = new JFrame();
@@ -40,13 +41,14 @@ public class Display extends Canvas implements Runnable {
 		Dimension size = new Dimension(WIDTH, HEIGHT);
 		this.setPreferredSize(size);
 
-		this.mouse = new Mouse();
+		this.userinput = new UserInput();
 
 		this.entityManager = new EntityManager();
 
-		this.addMouseListener(this.mouse);
-		this.addMouseMotionListener(this.mouse);
-		this.addMouseWheelListener(this.mouse);
+		this.addMouseListener(this.userinput.mouse);
+		this.addMouseMotionListener(this.userinput.mouse);
+		this.addMouseWheelListener(this.userinput.mouse);
+		this.addKeyListener(this.userinput.keyboard);
 
 	}
 
@@ -88,7 +90,7 @@ public class Display extends Canvas implements Runnable {
 		double delta = 0;
 		int frames = 0;
 
-		this.entityManager.init();
+		this.entityManager.init(this.userinput);
 
 		while (running) {
 			long now = System.nanoTime();
@@ -112,7 +114,7 @@ public class Display extends Canvas implements Runnable {
 
 	private void update() {
 		// TODO Auto-generated method stub
-		this.entityManager.update(this.mouse);
+		this.entityManager.update();
 	}
 
 	private void render() {
