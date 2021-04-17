@@ -77,6 +77,8 @@ public class Polyhedron {
         for (MyPolygon p : this.polygons) {
             p.translate(x,y,z);
         }
+        
+        this.sortPolygons();
     }
 
 }

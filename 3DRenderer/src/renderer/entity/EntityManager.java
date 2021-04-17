@@ -38,9 +38,9 @@ public class EntityManager {
 	public void init(UserInput userinput) {
 		this.mouse = userinput.mouse;
 		this.keyboard = userinput.keyboard;
-		this.entities.add(BasicEntityBuilder.createDiamond(new Color(105, 243, 63), 100, 0, 0, 0));
+		//this.entities.add(BasicEntityBuilder.createDiamond(new Color(105, 243, 63), 100, 0, 0, 0));
 		//this.entities.add(BasicEntityBuilder.createCube(100, 0, 0, 0);
-	    //this.entities.add(ComplexEntityBuilder.createRubiksCube(100, 0, 0, 0));
+	    this.entities.add(ComplexEntityBuilder.createRubiksCube(100, 0, 0, 0));
 	    this.setLighting();
 		
 	}
